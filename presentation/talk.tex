@@ -1,37 +1,89 @@
-\documentclass[t,10pt,serif,professionalfonts]{beamer}
+\documentclass[t,9pt,serif,professionalfonts,xcolor={table}]{beamer}
 
 \mode<presentation>{
   \usetheme{goudie}
   \usecolortheme{goudie}
 }
 
-\usepackage{amsmath, amsthm, amssymb, mathtools, multirow, dsfont, color, graphicx, lscape, units, tikz, booktabs, fixltx2e, bbm, ulem, setspace, MinionPro, MnSymbol}
+\usepackage{microtype, amsmath, amsthm, amssymb, mathtools, multirow, dsfont, graphicx, lscape, units, tikz, booktabs, bbm, ulem, MinionPro, MnSymbol, subfig, amsfonts, pifont}
 
-\setstretch{1.25}
+\linespread{1.1}
 \setlength{\ULdepth}{0.4em}
 \normalem
+\setlength{\parskip}{0.5\baselineskip}
+\setlength{\topsep}{0.5\baselineskip}
 
-\usepackage[backend=biber,firstinits=true,style=authoryear,doi=false,url=false,alldates=year]{biblatex}
+% BIBLIOGRAPHY STYLING
+\usepackage[backend=biber,giveninits=true,style=authoryear,doi=false,url=false,alldates=year,maxcitenames=2,mincitenames=1,uniquelist=false]{biblatex}
 \DeclareNameAlias{default}{last-first}
 \DeclareNameAlias{sortname}{last-first}
 % hide month and number, and make volume bold
-\AtEveryBibitem{\clearfield{number}}%
-\AtEveryCitekey{\clearfield{number}}%
+\AtEveryBibitem{\clearfield{number}\clearlist{language}}%
+\AtEveryCitekey{\clearfield{number}\clearlist{language}}
 \DeclareFieldFormat[article]{volume}{\mkbibbold{#1}}%
 \renewbibmacro{in:}{\ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}}%
 \DeclareFieldFormat[article]{pages}{#1}%
+\DefineBibliographyStrings{english}{%
+  andothers = {\emph{et al}\adddot}
+  }
+\renewcommand*{\nameyeardelim}{\addcomma\space}
 
+% BIBLIOGRAPHY
 \bibliography{../../../documents/bib/offline,../../../documents/bib/papers}
 
 \let\oldfootnote\footnote
 \renewcommand\footnote[1][]{\oldfootnote[frame,#1]}
 
+% FOOTNOTE AND CITATION STYLES
+\defbeamertemplate*{footnotetext}{default}{%
+  \vspace*{-0.35em}
+  \parindent 1em\noindent%
+  \raggedright
+  % \hbox to 1.8em{\hfil\insertfootnotemark}%
+  \insertfootnotetext\par}
+
+\newrobustcmd*{\footfullcitet}[1]{%
+  \textcite{#1}%
+  \AtNextCite{%
+    \setbeamertemplate{footnote}{\usebeamertemplate{footnotetext}}%
+    \let\mkbibfootnote\mkbibfootnotetext}%
+    \footfullcite{#1}}
+
+\newrobustcmd*{\footfullcitep}[1]{%
+    \parencite{#1}%
+  \AtNextCite{%
+    \setbeamertemplate{footnote}{\usebeamertemplate{footnotetext}}%
+    \let\mkbibfootnote\mkbibfootnotetext}%
+    \footfullcite{#1}}
+
+\newrobustcmd*{\footfullcitenomark}{%
+\AtNextCite{%
+    \setbeamertemplate{footnote}{\usebeamertemplate{footnotetext}}%
+    \let\mkbibfootnote\mkbibfootnotetext}%
+  \footfullcite}
+
+% TIKZ GRAPHICS
 \usetikzlibrary{calc, fit, positioning, shapes, arrows}
 \tikzset{>={stealth}}
+
+% Arrows to equations in TikZ
+\newcommand{\tikzmark}[3][]{
+\ifmmode
+\tikz[remember picture,baseline=(#2.base)] \node [inner sep=0pt,#1](#2) {$#3$};
+\else
+\tikz[remember picture,baseline=(#2.base)] \node [inner sep=0pt,#1](#2) {#3};
+\fi
+}
+
+% cancelling equations
+\usepackage[thicklines]{cancel}
+\renewcommand{\CancelColor}{\color{red}}
 
 % symbols
 \def\ci{\perp\!\!\!\perp} % from Wikipedia
 \def\notci{\perp\!\!\!\perp\!\!\!\!\!\!\!\!\!\!\;\diagup\;} % from Wikipedia
+\newcommand{\tickYes}{\(\text{\ding{51}}\)}
+\newcommand{\tickNo}{\(\text{\ding{55}}\)}
 
 % Distributions
 \newcommand{\dunif}{\text{U}}
@@ -62,17 +114,28 @@
 \begin{document}
 
 \title{Title of talk}
+\subtitle{A very interesting talk}
 \author{Robert Goudie}
-\date{\today}
+\date{14 Jan 2020}
+\institute{}
 \maketitle
 
 \begin{frame}
 \frametitle{Notation}
+\framesubtitle{Basic}
 \begin{beamercolorbox}[wd=1\textwidth, sep = 5pt]{redbox}
-Consider a finite population of size \(\popsize\), with the following random variables corresponding to measurements (that may or may not be actually taken)
+Consider a finite population of size...., with the following random variables corresponding to measurements (that may or may not be actually taken)
 \end{beamercolorbox}
 
 \bigskip
+def
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Notation}
+\framesubtitle{More more}
+
 def
 
 \end{frame}
@@ -102,12 +165,12 @@ def
 \end{frame}
 
 \begin{frame}[fragile]{Sampling scenarios}
-There are various possible sampling scenarios \footfullcite{Chambers:2003}, including
+There are various possible sampling scenarios \footfullcitet{Chambers:2003}, including
 
 \begin{itemize}
-\item Also \footfullcite{OMalley:2008ch}
+\item Also \footfullcitet{OMalley:2008ch}
 
-\item And\footfullcite{Richardson:2016dv}
+\item And\footfullcitet{Richardson:2016dv}
 \end{itemize}
 \end{frame}
 

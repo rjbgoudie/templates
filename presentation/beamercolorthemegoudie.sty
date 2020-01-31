@@ -10,13 +10,33 @@
 \definecolor{mypurple}{HTML}{6e267b}
 \definecolor{orangered}{HTML}{D72E2D}
 
-\setbeamercolor{alerted text}{fg=black!80!yellow}
+% http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/
+\definecolor{gggray}{HTML}{878787}
+\definecolor{ggorange}{HTML}{DD8E07}
+\definecolor{gglightblue}{HTML}{47A4E3}
+\definecolor{gggreen}{HTML}{128F5F}
+\definecolor{ggyellow}{HTML}{EBE034}
+\definecolor{ggred}{HTML}{C04604}
+\definecolor{ggpink}{HTML}{A75483}
+
+% a standardised ordering of ggplot colours
+\definecolor{gg1}{HTML}{DD8E07}
+\definecolor{gg2}{HTML}{47A4E3}
+\definecolor{gg3}{HTML}{128F5F}
+\definecolor{gg4}{HTML}{EBE034}
+\definecolor{gg5}{HTML}{C04604}
+\definecolor{gg6}{HTML}{A75483}
+
+
+\setbeamercolor{alerted text}{fg=orangered}
 \setbeamercolor*{palette primary}{fg=black,bg=white}
 \setbeamercolor*{palette secondary}{fg=black!70!black,bg=white}
 \setbeamercolor*{palette tertiary}{bg=black!25!white,fg=white}
 \setbeamercolor*{palette quaternary}{fg=black,bg=white}
 
 \setbeamercolor{redbox}{fg=white,bg=orangered}
+
+\setbeamercolor{boxtitles}{fg=white,bg=myblue}
 
 \setbeamercolor*{titlelike}{parent=palette primary,fg=myblue}
 \setbeamercolor{frametitle}{bg=white,fg=myblue}
@@ -39,12 +59,15 @@
 \setbeamercolor*{enumerate subitem}{fg=myblue}
 \setbeamercolor*{enumerate subsubitem}{fg=myblue}
 \setbeamercolor{item projected}{fg=white,bg=myblue}
+\setbeamercolor*{description item}{fg=orangered}
 
-\setbeamercolor{bibliography item}{fg=myblue}
-\setbeamercolor*{bibliography entry title}{fg=myblue}
-\setbeamercolor{bibliography entry author}{fg=myblue}
-\setbeamercolor{bibliography entry location}{fg=myblue}
-\setbeamercolor{bibliography entry note}{fg=myblue}
+\setbeamercolor{bibliography item}{fg=mygray}
+\setbeamercolor*{bibliography entry title}{fg=mygray}
+\setbeamercolor{bibliography entry author}{fg=mygray}
+\setbeamercolor{bibliography entry location}{fg=mygray}
+\setbeamercolor{bibliography entry note}{fg=mygray}
+
+\setbeamercolor{footnote}{fg=mygray}
 
 \mode
 <all>

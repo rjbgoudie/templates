@@ -1,22 +1,103 @@
 % R. J. B. Goudie 2011
 
 \mode<presentation>
-\setbeamertemplate{frametitle}[default]
-\setbeamertemplate{frametitle}
-{
-\uline{\insertframetitle}
-\par
+
+\usepackage[absolute,overlay]{textpos}
+\usepackage[export]{adjustbox}
+
+\newlength{\DepthReference}
+\settodepth{\DepthReference}{g}
+
+\newlength{\HeightReference}
+\settoheight{\HeightReference}{T}
+
+\newlength{\Width}
+
+\newcommand{\FilledColourBox}[2][myblue]%
+{%
+  \settowidth{\Width}{#2}%
+  % \setlength{\fboxsep}{0pt}%
+  \colorbox{#1}%
+  {%
+    \raisebox{-\DepthReference}%
+    {%
+      \parbox[b][\HeightReference+\DepthReference][c]{\Width}{\centering#2}%
+    }%
+  }%
 }
+
+% setup grid
+\TPGrid{32}{24}
+\setbeamersize{text margin left=\TPHorizModule,text margin right=\TPHorizModule}
+
 \setbeamerfont{frametitle}{size=\normalsize}
-\setbeamersize{text margin left = 2em}
-\setbeamersize{text margin right = 2em}
-\useinnertheme{circles}
+\useinnertheme{default}
+
+% ITEMIZE AND ENUMERATE
+% Remove space before itemize and enumerate
+\setbeamertemplate{itemize/enumerate body begin}{\vspace*{-0.5\baselineskip}}
+\setbeamertemplate{itemize/enumerate body end}{\vspace*{-0.5\baselineskip}}
 
 \defbeamertemplate*{itemize item}{}{\tiny\raise4pt\hbox{\textbullet}}
 \defbeamertemplate*{itemize subitem}{}{\raise1.5pt\hbox{\donotcoloroutermaths$\centerdot$}}
 \defbeamertemplate*{itemize subsubitem}{}{\raise1.5pt\hbox{\donotcoloroutermaths$\centerdot$}}
 
-\setbeamerfont{footnote}{size=\scriptsize}
+\setbeamerfont{enumerate items}{size*={1}{10}}
+
+% FOOTNOTES
+\setbeamerfont{footnote}{size=\fontsize{0.2cm}{0.21cm}\selectfont}
+
+% FRAME TITLE, and subtitle if available
+\setbeamertemplate{frametitle}{
+  {\setlength{\parskip}{0pt}
+    % UoC/BSU logo in top right of all slides
+    % \begin{textblock}{10}[1,0](31,1)
+    % \includegraphics[height=\TPHorizModule,right]{MRC_Biostatistics_Cambridge}
+    % \end{textblock}
+
+    \begin{textblock}{10}[0,0](1,1)
+    \ifx\insertframesubtitle\empty % if frame has no subtitle
+    \FilledColourBox{\color{white}\fontsize{9}{12}\selectfont \insertframetitle\strut}%
+    \else % if frame has a subtitle
+    \FilledColourBox{\color{white}\fontsize{9}{12}\selectfont \insertframetitle\strut}%
+    \FilledColourBox[myblue!25]{\color{myblue}\fontsize{9}{12}\selectfont \insertframesubtitle\strut}
+    \fi
+    \end{textblock}
+  }
+  \vspace{\TPHorizModule}
+  \vspace{\TPHorizModule}
+}
+
+% TITLE PAGE
+\setbeamertemplate{title page}{
+  {\setlength{\parskip}{0pt}
+    % top right UoC/BSU logo
+    \begin{textblock}{10}[1,0](31,1)
+    \includegraphics[height=1.5\TPHorizModule,right]{MRC_Biostatistics_Cambridge}
+    \end{textblock}
+
+    \begin{textblock}{30}[0,1](1,12)
+    \vspace{0pt}
+    \fontsize{2\TPHorizModule}{2.5\TPHorizModule}\selectfont \inserttitle
+    \vspace{0pt}
+    \end{textblock}
+
+    \begin{textblock}{30}[0,0](1,12)
+    \vspace{0pt}
+    \fontsize{1.5\TPHorizModule}{2\TPHorizModule}\selectfont \insertsubtitle
+    \end{textblock}
+
+    \begin{textblock}{30}[0,0](1,21)
+    \vspace{0pt}
+    \fontsize{0.8\TPHorizModule}{\TPHorizModule}\selectfont \insertauthor, \insertinstitute
+    \end{textblock}
+
+    \begin{textblock}{30}[0,0](1,22)
+    \vspace{0pt}
+    {\color{mygray}\fontsize{0.6\TPHorizModule}{\TPHorizModule}\selectfont \insertdate}
+    \end{textblock}
+  }
+}
 
 \mode
 <all>
